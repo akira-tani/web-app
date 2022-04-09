@@ -48,6 +48,7 @@ export default {
             password: this.password,
             uid: data.user.uid,
           }
+          console.log(sendData);
           this.$axios.post("http://127.0.0.1:8000/api/user/", sendData);
           this.$router.replace('/home')
           })

@@ -7,22 +7,23 @@
       <div class="sidebar">
         <Sidebar></Sidebar>
       </div>
-      <p>{{ message }} </p>
       <div class="share">
-        <!-- <div class="share__inner" v-for="item in userLists" :key="item.id"> -->
-        <div class="share__inner">
-          <p class="share__name">aaaaa</p>
-          <div class="share__heart">
-            <img src="@/assets/img/heart.png"/>
+        <div class="share__inner" v-for="item in postLists" :key="item.id">
+        <!-- <div class="share__inner"> -->
+          <div class="share__inner--upper">
+            <h2 class="share__name">{{ item.name }}</h2>
+            <div class="share__heart">
+              <img src="@/assets/img/heart.png"/>
+            </div>
+            <h2 class="share__count">0</h2>
+            <div class="share__delete">
+              <img src="@/assets/img/cross.png"/>
+            </div>
+            <div class="share__tocomment">
+              <img src="@/assets/img/detail.png"/>
+            </div>
           </div>
-          <p class="share__count">0</p>
-          <div class="share__delete">
-            <img src="@/assets/img/cross.png"/>
-          </div>
-          <div class="share__tocomment">
-            <img src="@/assets/img/detail.png"/>
-          </div>
-          <p class="share__content">aaaaaaaa</p>
+          <p class="share__content">{{ item.content }}</p>
         </div>
       </div>
     </div>
@@ -30,6 +31,7 @@
 </template>
 
 <script>
+
 </script>
 
 <style>
@@ -39,4 +41,33 @@
 .home__content {
   display: flex;
 }
+.share {
+  width: 75%;
+}
+.share__inner {
+  border-left : 1px solid white;
+  border-bottom : 1px solid white;
+  padding: 20px;
+}
+.share__inner--upper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.share__heart img {
+  height: 28px;
+}
+.share__delete img {
+  height: 28px;
+}
+.share__tocomment img {
+  height: 28px;
+}
+.share__name, .share__heart, .share__count {
+  margin-right: 10px;
+}
+.share__delete {
+  margin-right: 50px;
+}
+
 </style>

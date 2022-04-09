@@ -15,8 +15,8 @@
     <div class="sidebar__share">
       <p class="post__title">シェア</p>
       <div class="post__content">
-        <textarea name="text" class="post__input" rows="10" />
-        <router-link :to="`/home/${this.uid}`" class="post__btn" v-model="share">シェアする</router-link>
+        <textarea  v-model="content" name="text" class="post__input" rows="10" />
+        <button @click="share" class="post__btn">シェアする</button>
       </div>
     </div>
   </div>
@@ -25,24 +25,37 @@
 <script>
 import firebase from '~/plugins/firebase'
 export default {
+  data() {
+    return {
+      name: null,
+      uid: null,
+      content: null,
+      user_id: null,
+      uesrLists: [],
+    }
+  },
   methods: {
     logout() {
       firebase
         .auth()
         .signOut()
         .then(() => {
-          alert('ログアウトが完了しました')
           this.$router.replace('/login')
         })
     },
-    share() {
+    async share() {
       const currentUser = firebase.auth().currentUser;
       this.uid = currentUser.uid;
-      firebase
-        .firestore()
-        .collection("users")
-        .doc(currentUser.uid)
-        .get()  
+      console.log(this.uid);
+      const resData = this.$axios.get(
+        "http://127.0.0.1:8000/api/user/" + this.uid
+      );
+      this.uesrLists = resData.data;
+      const sendData = {
+        content: this.content,
+        user_id: this.userLists.id
+      };
+      await this.$axios.post("http://127.0.0.1:8000/api/post/", sendData);
     }
   },
 }
